@@ -69,10 +69,14 @@ export function ArticleList({
       ? LoadingState.LOADED
       : LoadingState.NOT_LOADED;
 
+  // A 2XX response with no body (e.g. 204) leaves `data` without the expected
+  // shape; treat it as an empty page instead of rendering NaN pages.
+  const articlesCount = isSuccess && Number.isFinite(data?.articlesCount) ? data.articlesCount : 0;
+
   // http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
   const totalPages =
-    isSuccess && limit ? Array.from(new Array(Math.ceil(data.articlesCount / limit)), (_val, index) => index + 1) : [];
-  const results = isSuccess ? data.articles : [];
+    isSuccess && limit ? Array.from(new Array(Math.ceil(articlesCount / limit)), (_val, index) => index + 1) : [];
+  const results = isSuccess && Array.isArray(data?.articles) ? data.articles : [];
 
   const setPageTo = (pageNumber: number) => {
     if (pageNumber !== page) {
