@@ -30,3 +30,17 @@ pass and all 16 security tests pass**. The 7 failures above may remain failing _
 they still fail against Angular at the time of the comparison (re-run the baseline to
 confirm before accepting any failure). Any _additional_ failure is a migration
 regression and must be fixed.
+
+## Final React result — parity reached
+
+Run on 2026-08-05 against the **React** app (`npm run start` on :4300), same backend and
+same serial-with-retry configuration:
+
+| Suite    | Angular baseline     | React                |
+| -------- | -------------------- | -------------------- |
+| main     | 115 passed, 7 failed | 115 passed, 7 failed |
+| security | 16 passed            | 16 passed            |
+
+The failing set is identical to the 7 listed above — same specs, same 422 on
+`PUT /api/user`, re-confirmed still failing against Angular on :4200. No regressions and
+no new failures.
