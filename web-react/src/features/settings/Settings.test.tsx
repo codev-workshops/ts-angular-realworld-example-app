@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { HttpResponse, http as mswHttp } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -71,6 +71,20 @@ describe('Settings', () => {
 
     expect(imageInput()).toHaveValue('');
     expect(bioInput()).toHaveValue('');
+  });
+
+  it('renders no form until auth resolves, then prefills from the arriving user', async () => {
+    useAuthStore.setState({ currentUser: null, authState: 'loading' });
+    renderSettings();
+
+    expect(screen.queryByPlaceholderText('Username')).not.toBeInTheDocument();
+
+    await act(async () => {
+      signIn();
+    });
+
+    expect(usernameInput()).toHaveValue(user.username);
+    expect(bioInput()).toHaveValue(user.bio);
   });
 
   it('submits the form and navigates to the profile page', async () => {

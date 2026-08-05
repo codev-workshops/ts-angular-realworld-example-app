@@ -1,5 +1,6 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { User } from '../../core/auth/model';
 import { useAuthStore } from '../../core/auth/store';
 import { Errors } from '../../core/models/errors';
 import { ListErrors } from '../../shared/ListErrors';
@@ -26,10 +27,22 @@ interface SettingsForm {
 
 const emptyForm: SettingsForm = { image: '', username: '', bio: '', email: '', password: '' };
 
+/** A null `bio`/`image` prefills as `''`, never the string "null". */
+function formFor(user: User): SettingsForm {
+  return {
+    image: user.image ?? '',
+    username: user.username,
+    bio: user.bio ?? '',
+    email: user.email,
+    password: '',
+  };
+}
+
 /**
  * Port of `settings.component.ts` + `.html`.
  */
 export function Settings() {
+  const authState = useAuthStore(s => s.authState);
   const currentUser = useAuthStore(s => s.currentUser);
   const update = useAuthStore(s => s.update);
   const logout = useAuthStore(s => s.logout);
@@ -40,22 +53,17 @@ export function Settings() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   /**
-   * Angular prefilled once in `ngOnInit` from `getCurrentUserSync()`; here the
-   * user may still be loading on mount, so prefill when it arrives. A null
-   * `bio`/`image` becomes `''` so the inputs never show the string "null".
+   * Angular prefilled once in `ngOnInit`, and its app initializer guaranteed
+   * the user was already loaded by then. React's `initAuth()` is
+   * non-blocking, so the user can arrive after mount: prefill during render
+   * (not in an effect) so the inputs are never painted, and so never typed
+   * into, before they hold the user's values.
    */
-  useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
-    setForm(previous => ({
-      ...previous,
-      image: currentUser.image ?? '',
-      username: currentUser.username,
-      bio: currentUser.bio ?? '',
-      email: currentUser.email,
-    }));
-  }, [currentUser]);
+  const [prefilledFrom, setPrefilledFrom] = useState<User | null>(null);
+  if (currentUser && currentUser !== prefilledFrom) {
+    setPrefilledFrom(currentUser);
+    setForm(formFor(currentUser));
+  }
 
   const setField = (field: keyof SettingsForm, value: string) => setForm(previous => ({ ...previous, [field]: value }));
 
@@ -71,6 +79,12 @@ export function Settings() {
       setIsSubmitting(false);
     }
   };
+
+  // Nothing to show until auth resolves; rendering an empty form first would
+  // let a fast client type into fields the prefill is about to overwrite.
+  if (authState === 'loading') {
+    return <div className="settings-page"></div>;
+  }
 
   return (
     <div className="settings-page">
