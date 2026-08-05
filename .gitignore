@@ -2,11 +2,13 @@
 
 # compiled output
 /dist
+/react/dist
 /tmp
 /out-tsc
 
 # dependencies
 /node_modules
+/react/node_modules
 
 # IDEs and editors
 .vscode/
@@ -47,3 +49,7 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# React app build info
+/react/tsconfig.tsbuildinfo
+/package-lock.json

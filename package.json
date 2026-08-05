@@ -6,18 +6,22 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "react:install": "npm --prefix react install",
+    "react:start": "npm --prefix react run start",
+    "react:build": "npm --prefix react run build",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test --grep-invert @security",
+    "test:e2e:react": "E2E_TARGET=react playwright test --grep-invert @security",
     "test:e2e:security": "playwright test --grep @security",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
     "test:e2e:disabled": "cat e2e/DISABLED_TESTS.md",
-    "format": "prettier --write \"**/*.{ts,html,css,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,html,css,json,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,html,css,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,html,css,json,md}\"",
     "prepare": "husky install"
   },
   "engines": {
@@ -56,6 +60,6 @@
     "vitest": "^4.0.18"
   },
   "lint-staged": {
-    "*.{ts,html,css,json,md}": "prettier --write"
+    "*.{ts,tsx,html,css,json,md}": "prettier --write"
   }
 }

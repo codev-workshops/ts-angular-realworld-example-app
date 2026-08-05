@@ -2,7 +2,13 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
+ *
+ * The suite is framework-agnostic: set E2E_TARGET=react to run it against the
+ * React app being migrated in `react/` instead of the Angular app. Both serve
+ * on port 4200, so only the dev-server command changes.
  */
+const startCommand = process.env.E2E_TARGET === 'react' ? 'npm --prefix react run start' : 'npm run start';
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: false, // Disable full parallelization to avoid race conditions
@@ -45,7 +51,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run start',
+    command: startCommand,
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
