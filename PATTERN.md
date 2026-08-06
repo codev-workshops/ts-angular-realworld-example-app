@@ -113,6 +113,9 @@ const authenticated = useAuthStore(selectIsAuthenticated);
 }
 ```
 
+`useIsAuthenticated()` (`src/core/auth/useIsAuthenticated.ts`) is that selector call wrapped
+in a hook; use either form.
+
 ### Pipes → plain functions
 
 `defaultImage` and `markdown` pipes become utility functions (`marked` output passed through

@@ -5,3 +5,8 @@
 # this file and CI goes back to running the whole suite.
 #
 # Phase 0 lists nothing: no page is ported yet.
+#
+# Phase 2 (auth store, app shell, router skeleton, guards):
+health.spec.ts
+# user-fetch-errors.spec.ts stays out until the home feed exists: two of its cases assert
+# .article-preview / Global Feed / .tag-pill. Everything else in it already passes.

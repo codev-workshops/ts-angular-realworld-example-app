@@ -27,6 +27,13 @@ if (specs.length === 0) {
 }
 
 const playwright = join(root, 'node_modules', '.bin', 'playwright');
-const args = ['test', ...process.argv.slice(2), ...specs.map(spec => join('e2e', spec))];
+// --pass-with-no-tests: a migrated spec may contain no test matching the grep (the
+// @security run, for instance, until an @security-tagged spec is migrated).
+const args = [
+  'test',
+  '--pass-with-no-tests',
+  ...process.argv.slice(2),
+  ...specs.map(spec => join('e2e', spec)),
+];
 const { status } = spawnSync(playwright, args, { stdio: 'inherit', cwd: root });
 process.exit(status ?? 1);
