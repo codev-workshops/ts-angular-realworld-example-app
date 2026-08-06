@@ -15,6 +15,8 @@
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test --grep-invert @security",
     "test:e2e:security": "playwright test --grep @security",
+    "test:e2e:migrated": "node scripts/e2e-migrated.mjs --grep-invert @security",
+    "test:e2e:security:migrated": "node scripts/e2e-migrated.mjs --grep @security",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",

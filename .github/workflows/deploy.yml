@@ -19,7 +19,7 @@ jobs:
       - run: bun run build
 
       - name: Zip build
-        run: cd dist/angular-conduit/browser && zip -r ../../../build.zip .
+        run: cd dist/react-conduit && zip -r ../../build.zip .
 
       - name: Create Release
         uses: softprops/action-gh-release@v1

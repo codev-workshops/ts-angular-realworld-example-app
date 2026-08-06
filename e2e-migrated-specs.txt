@@ -1,0 +1,7 @@
+# Specs that the React migration is expected to keep green, one filename per line.
+# CI (see .github/workflows/playwright.yml and security-tests.yml) runs only these while
+# the Angular -> React migration is in flight; each phase appends the specs it takes
+# ownership of, and previously listed specs must stay green. The Phase 7 cutover deletes
+# this file and CI goes back to running the whole suite.
+#
+# Phase 0 lists nothing: no page is ported yet.
