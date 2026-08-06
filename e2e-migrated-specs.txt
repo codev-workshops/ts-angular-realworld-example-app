@@ -30,9 +30,11 @@ auth.spec.ts
 # and the three network-failure ones) all pass now, but the spec also covers the editor,
 # comment and article pages that Wave 3's other phases deliver.
 #
-# Phase 5 (profile pages, follow button, nested profile routes) adds no spec: social.spec.ts,
-# navigation.spec.ts and url-navigation.spec.ts all drive the flow through the register()/login()
-# helpers, and the auth page is still AuthPlaceholder (a sibling Wave 3 phase), so every test
-# that authenticates times out before it reaches the profile page. The profile pages themselves
-# are verified by Vitest unit tests and pass end to end once a real token is present. These
-# specs join the list when the auth-page phase lands.
+# Phase 5 (profile pages, follow button, nested profile routes): with the auth page (Phase 6)
+# and the home/article/editor pages (Phase 4) now integrated, the three specs this phase drives
+# all pass end to end, so they join the list. social.spec.ts is entirely profile/follow flows;
+# navigation.spec.ts and url-navigation.spec.ts also exercise sibling-owned home feed / tag /
+# pagination pages, which are green on the integrated branch.
+social.spec.ts
+navigation.spec.ts
+url-navigation.spec.ts
