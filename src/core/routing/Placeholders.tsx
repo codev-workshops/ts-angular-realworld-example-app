@@ -6,7 +6,7 @@ import type { ArticleListConfig } from '@/features/article/models/article-list-c
 /**
  * Placeholders for the pages later phases port. They all render inside the normal shell
  * (navbar + footer stay visible), and each export is deleted by the phase that replaces it:
- * Phase 3 home/profile, Phase 4 article, Phase 5 editor, Phase 6 settings.
+ * Phase 3 home/profile, Phase 4 article, Phase 5 editor.
  */
 function Placeholder({ title }: { title: string }) {
   return (
@@ -66,9 +66,4 @@ export function ArticlePlaceholder() {
 /** Phase 5: `/editor` and `/editor/:slug`. */
 export function EditorPlaceholder() {
   return <Placeholder title="Editor" />;
-}
-
-/** Phase 6: `/settings`. */
-export function SettingsPlaceholder() {
-  return <Placeholder title="Settings" />;
 }
