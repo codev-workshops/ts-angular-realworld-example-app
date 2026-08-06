@@ -10,3 +10,9 @@
 health.spec.ts
 # user-fetch-errors.spec.ts stays out until the home feed exists: two of its cases assert
 # .article-preview / Global Feed / .tag-pill. Everything else in it already passes.
+#
+# Phase 3 (shared article UI: ArticleList / ArticlePreview / ArticleMeta, sanitized markdown)
+# adds no spec: xss-security.spec.ts still needs the profile page (.user-info, its article
+# feed) and the article page (.article-content), both of which Wave 3 delivers. 2 of its 16
+# tests pass today (navbar image, article comments); the other 14 time out waiting for those
+# pages. It goes on this list with Phase 4/5/6.

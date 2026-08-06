@@ -10,9 +10,14 @@ interface FavoriteButtonProps {
   onToggle?: (favorited: boolean) => void;
   /** `<ng-content>` becomes children. */
   children?: ReactNode;
+  /**
+   * Angular put layout classes on the host element (`<app-favorite-button class="pull-xs-right">`);
+   * React has no host element, so callers pass them here and they land on the button.
+   */
+  className?: string;
 }
 
-export function FavoriteButton({ article, onToggle, children }: FavoriteButtonProps) {
+export function FavoriteButton({ article, onToggle, children, className: extraClassName }: FavoriteButtonProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isAuthenticated = useAuthStore(selectIsAuthenticated);
   const navigate = useNavigate();
@@ -45,6 +50,7 @@ export function FavoriteButton({ article, onToggle, children }: FavoriteButtonPr
     'btn-sm',
     isSubmitting ? 'disabled' : '',
     article.favorited ? 'btn-primary' : 'btn-outline-primary',
+    extraClassName ?? '',
   ]
     .filter(Boolean)
     .join(' ');
