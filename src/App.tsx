@@ -6,7 +6,8 @@ import { RequireAnonymous, RequireAuth } from '@/core/routing/guards';
 import { setNavigator } from '@/core/auth/store';
 
 /** `loadComponent: () => import(...)` becomes React.lazy + <Suspense>. */
-const AuthPlaceholder = lazy(() => import('@/core/auth/AuthPlaceholder'));
+const Auth = lazy(() => import('@/core/auth/Auth'));
+const Settings = lazy(() => import('@/features/settings/Settings'));
 const placeholders = () => import('@/core/routing/Placeholders');
 const Home = lazy(() => placeholders().then(m => ({ default: m.HomePlaceholder })));
 const Profile = lazy(() => placeholders().then(m => ({ default: m.ProfilePlaceholder })));
@@ -14,7 +15,6 @@ const ProfileArticles = lazy(() => placeholders().then(m => ({ default: m.Profil
 const ProfileFavorites = lazy(() => placeholders().then(m => ({ default: m.ProfileFavoritesPlaceholder })));
 const Article = lazy(() => placeholders().then(m => ({ default: m.ArticlePlaceholder })));
 const Editor = lazy(() => placeholders().then(m => ({ default: m.EditorPlaceholder })));
-const Settings = lazy(() => placeholders().then(m => ({ default: m.SettingsPlaceholder })));
 
 /** Gives the store the router's navigate so `logout()` can do `router.navigate(['/'])`. */
 function useStoreNavigator() {
@@ -39,8 +39,8 @@ export function App() {
           <Route path="/tag/:tag" element={<Home />} />
 
           <Route element={<RequireAnonymous />}>
-            <Route path="/login" element={<AuthPlaceholder authType="login" />} />
-            <Route path="/register" element={<AuthPlaceholder authType="register" />} />
+            <Route path="/login" element={<Auth authType="login" />} />
+            <Route path="/register" element={<Auth authType="register" />} />
           </Route>
 
           <Route element={<RequireAuth />}>
