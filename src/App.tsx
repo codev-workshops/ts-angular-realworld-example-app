@@ -9,12 +9,12 @@ import { setNavigator } from '@/core/auth/store';
 const Auth = lazy(() => import('@/core/auth/Auth'));
 const Settings = lazy(() => import('@/features/settings/Settings'));
 const placeholders = () => import('@/core/routing/Placeholders');
-const Home = lazy(() => placeholders().then(m => ({ default: m.HomePlaceholder })));
+const Home = lazy(() => import('@/features/article/pages/home/Home'));
 const Profile = lazy(() => placeholders().then(m => ({ default: m.ProfilePlaceholder })));
 const ProfileArticles = lazy(() => placeholders().then(m => ({ default: m.ProfileArticlesPlaceholder })));
 const ProfileFavorites = lazy(() => placeholders().then(m => ({ default: m.ProfileFavoritesPlaceholder })));
-const Article = lazy(() => placeholders().then(m => ({ default: m.ArticlePlaceholder })));
-const Editor = lazy(() => placeholders().then(m => ({ default: m.EditorPlaceholder })));
+const Article = lazy(() => import('@/features/article/pages/article/Article'));
+const Editor = lazy(() => import('@/features/article/pages/editor/Editor'));
 
 /** Gives the store the router's navigate so `logout()` can do `router.navigate(['/'])`. */
 function useStoreNavigator() {
