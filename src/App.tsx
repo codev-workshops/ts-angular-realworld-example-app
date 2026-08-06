@@ -4,17 +4,20 @@ import { Header } from '@/core/layout/Header';
 import { Footer } from '@/core/layout/Footer';
 import { RequireAnonymous, RequireAuth } from '@/core/routing/guards';
 import { setNavigator } from '@/core/auth/store';
+// Not lazy: React Router commits the URL before a lazy route's chunk arrives and keeps the old view
+// on screen meanwhile, so a feed click would leave the feed rendered under `/article/:slug`. Angular's
+// router only swaps the view once `loadComponent` resolves.
+import Article from '@/features/article/pages/article/Article';
 
 /** `loadComponent: () => import(...)` becomes React.lazy + <Suspense>. */
 const Auth = lazy(() => import('@/core/auth/Auth'));
 const Settings = lazy(() => import('@/features/settings/Settings'));
 const placeholders = () => import('@/core/routing/Placeholders');
-const Home = lazy(() => placeholders().then(m => ({ default: m.HomePlaceholder })));
+const Home = lazy(() => import('@/features/article/pages/home/Home'));
 const Profile = lazy(() => placeholders().then(m => ({ default: m.ProfilePlaceholder })));
 const ProfileArticles = lazy(() => placeholders().then(m => ({ default: m.ProfileArticlesPlaceholder })));
 const ProfileFavorites = lazy(() => placeholders().then(m => ({ default: m.ProfileFavoritesPlaceholder })));
-const Article = lazy(() => placeholders().then(m => ({ default: m.ArticlePlaceholder })));
-const Editor = lazy(() => placeholders().then(m => ({ default: m.EditorPlaceholder })));
+const Editor = lazy(() => import('@/features/article/pages/editor/Editor'));
 
 /** Gives the store the router's navigate so `logout()` can do `router.navigate(['/'])`. */
 function useStoreNavigator() {
