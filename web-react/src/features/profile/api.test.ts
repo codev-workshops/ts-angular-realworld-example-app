@@ -84,7 +84,9 @@ describe('profile api', () => {
 
     it('handles a profile with an empty image', async () => {
       server.use(
-        mswHttp.get(`${API_URL}/profiles/testuser`, () => HttpResponse.json({ profile: { ...mockProfile, image: '' } })),
+        mswHttp.get(`${API_URL}/profiles/testuser`, () =>
+          HttpResponse.json({ profile: { ...mockProfile, image: '' } }),
+        ),
       );
 
       await expect(getProfile('testuser')).resolves.toMatchObject({ image: '' });
