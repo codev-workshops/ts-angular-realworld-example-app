@@ -57,6 +57,11 @@ export function ArticleList({
         if (id !== requestId.current) {
           return;
         }
+        if (!data || !Array.isArray(data.articles)) {
+          // An empty or unparseable body left Angular's subscriber without articles and the
+          // list in its loading state; rendering it would take the whole page down.
+          return;
+        }
         setLoading(LoadingState.LOADED);
         setResults(data.articles);
         setTotalPages(

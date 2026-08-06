@@ -29,3 +29,12 @@ auth.spec.ts
 # error-handling.spec.ts stays out too — its settings and login/register cases (400/401/500
 # and the three network-failure ones) all pass now, but the spec also covers the editor,
 # comment and article pages that Wave 3's other phases deliver.
+#
+# Phase 5 (profile pages, follow button, nested profile routes): with the auth page (Phase 6)
+# and the home/article/editor pages (Phase 4) now integrated, the three specs this phase drives
+# all pass end to end, so they join the list. social.spec.ts is entirely profile/follow flows;
+# navigation.spec.ts and url-navigation.spec.ts also exercise sibling-owned home feed / tag /
+# pagination pages, which are green on the integrated branch.
+social.spec.ts
+navigation.spec.ts
+url-navigation.spec.ts

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArticleMeta } from '@/features/article/components/ArticleMeta';
 import { ArticleComment } from '@/features/article/components/ArticleComment';
 import { FavoriteButton } from '@/features/article/components/FavoriteButton';
-import { FollowButton } from './FollowButton';
+import { FollowButton } from '@/features/profile/components/FollowButton';
 import { ListErrors } from '@/shared/components/ListErrors';
 import { Markdown } from '@/shared/components/Markdown';
 import { defaultImage } from '@/shared/utils/default-image';
