@@ -1,10 +1,10 @@
-# ![Angular Example App](logo.png)
+# ![React Example App](logo.png)
 
-> ### Angular codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://realworld.show) spec and API.
+> ### React codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://realworld.show) spec and API.
 
 ### [RealWorld](https://realworld.show)
 
-This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more. We've gone to great lengths to adhere to the [Angular Styleguide](https://angular.dev/style-guide) & best practices.
+This codebase was created to demonstrate a fully fledged application built with React that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more. It uses Vite, TypeScript, React Router (data router with route-level code splitting), Zustand for auth state, React Hook Form for forms and axios for HTTP.
 
 # How it works
 
@@ -12,13 +12,23 @@ A global documentation for the project is available at [docs.realworld.show](htt
 
 # Getting started
 
-Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. You can `bun install` to resolve all dependencies (should take a couple of seconds).
+Requires Node >= 22.12 (see `.nvmrc`). Run `bun install` to resolve all dependencies (`npm install` works too).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `bun run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Building the project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `bun run build` to build the project. The build artifacts will be stored in `dist/react-conduit`.
+
+### Testing
+
+```bash
+bun run test              # unit tests (Vitest + Testing Library)
+bun run test:e2e          # Playwright, everything except @security
+bun run test:e2e:security # the @security suite
+bun run lint              # ESLint
+bun run typecheck         # tsc --noEmit
+```
 
 ## Functionality overview
 
@@ -54,13 +64,6 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
   - Show basic user info
   - List of articles populated from author's created articles or author's favorited articles
 
-## Realworld Angular
-
-This project may be too simple for getting a good understanding of the different ways an Angular project can be built.
-For a comprehensive understanding of how more complex Angular projects can be implemented, you may check the [
-RealWorld Angular](https://github.com/realworld-angular) organization that is specialized in Angular development, currently managed by [Gerome Grignon](https://github.com/geromegrignon).
-
 ## License
 
 - **Project code**: [MIT License](LICENSE)
-- **Angular logo**: The Angular logo is a trademark of Google LLC, used to indicate this project is built with Angular.

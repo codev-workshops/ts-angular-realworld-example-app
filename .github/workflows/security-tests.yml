@@ -23,10 +23,8 @@ jobs:
     - name: Install Playwright Browsers
       run: bunx playwright install --with-deps chromium
 
-    # Only the specs listed in e2e-migrated-specs.txt run while the Angular -> React
-    # migration is in flight. Phase 7 restores `bun run test:e2e:security`.
     - name: Run Security Tests
-      run: bun run test:e2e:security:migrated
+      run: bun run test:e2e:security
       env:
         CI: true
 

@@ -6,8 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default tseslint.config(
   {
-    // Angular sources are kept for reference until the Phase 7 cutover.
-    ignores: ['dist', 'src/app', 'src/main.ts', 'src/test-setup.ts', 'playwright-report', 'test-results'],
+    ignores: ['dist', 'playwright-report', 'test-results'],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -30,8 +29,8 @@ export default tseslint.config(
   {
     files: ['e2e/**/*.ts', '*.config.{ts,js,mjs}'],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
-    // The e2e suite is copied verbatim from the Angular app and is the parity gate;
-    // it must stay byte-identical, so app-only conventions are not enforced there.
+    // The e2e suite is the parity gate and must stay byte-identical,
+    // so app-only conventions are not enforced there.
     rules: {
       'react-hooks/rules-of-hooks': 'off',
       '@typescript-eslint/consistent-type-imports': 'off',
