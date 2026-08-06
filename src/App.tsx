@@ -8,11 +8,10 @@ import { setNavigator } from '@/core/auth/store';
 /** `loadComponent: () => import(...)` becomes React.lazy + <Suspense>. */
 const Auth = lazy(() => import('@/core/auth/Auth'));
 const Settings = lazy(() => import('@/features/settings/Settings'));
-const placeholders = () => import('@/core/routing/Placeholders');
 const Home = lazy(() => import('@/features/article/pages/home/Home'));
-const Profile = lazy(() => placeholders().then(m => ({ default: m.ProfilePlaceholder })));
-const ProfileArticles = lazy(() => placeholders().then(m => ({ default: m.ProfileArticlesPlaceholder })));
-const ProfileFavorites = lazy(() => placeholders().then(m => ({ default: m.ProfileFavoritesPlaceholder })));
+const Profile = lazy(() => import('@/features/profile/pages/profile/Profile').then(m => ({ default: m.Profile })));
+const ProfileArticles = lazy(() => import('@/features/profile/components/ProfileArticles'));
+const ProfileFavorites = lazy(() => import('@/features/profile/components/ProfileFavorites'));
 const Article = lazy(() => import('@/features/article/pages/article/Article'));
 const Editor = lazy(() => import('@/features/article/pages/editor/Editor'));
 
