@@ -11,10 +11,10 @@ health.spec.ts
 #
 # Phase 4 (home, article and editor pages, article comments): the home feed now exists, so
 # the two deferred user-fetch-errors cases (.article-preview / Global Feed / .tag-pill) pass
-# and the whole file is green. articles.spec.ts and comments.spec.ts stay out until the auth
-# page is ported: every one of their tests registers a user first, and /register is still the
-# Phase 2 placeholder.
+# and the whole file is green.
 user-fetch-errors.spec.ts
+articles.spec.ts
+comments.spec.ts
 #
 # Phase 3 (shared article UI: ArticleList / ArticlePreview / ArticleMeta, sanitized markdown)
 # adds no spec: xss-security.spec.ts still needs the profile page (.user-info, its article
