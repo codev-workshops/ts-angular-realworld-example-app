@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "vitest",
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test --grep-invert @security",
@@ -16,12 +20,12 @@
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
     "test:e2e:disabled": "cat e2e/DISABLED_TESTS.md",
-    "format": "prettier --write \"**/*.{ts,html,css,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,html,css,json,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,html,css,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,html,css,json,md}\"",
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=22.12.0"
   },
   "private": true,
   "dependencies": {
@@ -35,27 +39,48 @@
     "@angular/router": "21.1.1",
     "@rx-angular/cdk": "21.0.0",
     "@rx-angular/template": "21.0.0",
+    "axios": "^1.7.9",
+    "dompurify": "^3.2.4",
     "marked": "^17.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "react-router-dom": "^7.1.5",
     "rxjs": "^7.8.2",
-    "tslib": "^2.8.1"
+    "tslib": "^2.8.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.2.2",
     "@angular/build": "21.1.1",
     "@angular/cli": "21.1.1",
     "@angular/compiler-cli": "21.1.1",
+    "@eslint/js": "^9.19.0",
     "@playwright/test": "^1.58.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/marked": "^6.0.0",
+    "@types/node": "^22",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
     "@vitest/ui": "^4.0.18",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "lint-staged": "^16.2.7",
     "playwright": "^1.58.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.3",
+    "typescript-eslint": "^8.23.0",
+    "vite": "^7",
     "vitest": "^4.0.18"
   },
   "lint-staged": {
-    "*.{ts,html,css,json,md}": "prettier --write"
+    "*.{ts,tsx,html,css,json,md}": "prettier --write"
   }
 }
