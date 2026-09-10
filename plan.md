@@ -23,15 +23,15 @@ Repository: `codev-workshops/ts-angular-realworld` (old name `ts-angular-realwor
 
 ## Status
 
-| Phase | Target version         | Branch                                          | PR  | Status                    | Resulting `@angular/core` |
-| ----- | ---------------------- | ----------------------------------------------- | --- | ------------------------- | ------------------------- |
-| 0     | Prework (plan + tests) | `feature/praveen-migration-demo-phase0-prework` | TBD | In progress               | 21.1.1 (unchanged)        |
-| 1     | Angular 17             | -                                               | -   | Already satisfied on main | 21.1.1                    |
-| 2     | Angular 18             | -                                               | -   | Already satisfied on main | 21.1.1                    |
-| 3     | Angular 19             | -                                               | -   | Already satisfied on main | 21.1.1                    |
-| 4     | Angular 20             | -                                               | -   | Already satisfied on main | 21.1.1                    |
-| 5     | Angular 21             | -                                               | -   | Already satisfied on main | 21.1.1                    |
-| 6     | Angular 22             | `feature/praveen-migration-demo-phase6-ng22`    | -   | Pending                   | -                         |
+| Phase | Target version         | Branch                                          | PR                                                                     | Status                    | Resulting `@angular/core` |
+| ----- | ---------------------- | ----------------------------------------------- | ---------------------------------------------------------------------- | ------------------------- | ------------------------- |
+| 0     | Prework (plan + tests) | `feature/praveen-migration-demo-phase0-prework` | [#27](https://github.com/codev-workshops/ts-angular-realworld/pull/27) | In review                 | 21.1.1 (unchanged)        |
+| 1     | Angular 17             | -                                               | -                                                                      | Already satisfied on main | 21.1.1                    |
+| 2     | Angular 18             | -                                               | -                                                                      | Already satisfied on main | 21.1.1                    |
+| 3     | Angular 19             | -                                               | -                                                                      | Already satisfied on main | 21.1.1                    |
+| 4     | Angular 20             | -                                               | -                                                                      | Already satisfied on main | 21.1.1                    |
+| 5     | Angular 21             | -                                               | -                                                                      | Already satisfied on main | 21.1.1                    |
+| 6     | Angular 22             | `feature/praveen-migration-demo-phase6-ng22`    | -                                                                      | Pending                   | -                         |
 
 Evidence that phases 1-5 are already satisfied on `main`:
 
