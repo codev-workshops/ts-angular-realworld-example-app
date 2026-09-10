@@ -46,14 +46,14 @@ Evidence that phases 1-5 are already satisfied on `main`:
 - [x] Install Node 22 and bump `engines.node` in `package.json` (`>=22.22.3`; the Angular 22 CLI refuses Node 20)
 - [x] `ng update @angular/core@22 @angular/cli@22 @angular/build@22` (no `--force`)
 - [x] TypeScript 6 (`~6.0.3`)
-- [x] `@rx-angular/cdk` / `@rx-angular/template` 22 if released (otherwise document) - **not released** (latest is 21.x with peer `@angular/core ^21.0.0`); kept at 21.0.0, see Cross-cutting follow-ups
+- [x] `@rx-angular/cdk` / `@rx-angular/template` 22 if released (otherwise document) - **not released** (latest is 21.x with peer `@angular/core ^21.0.0`). Keeping 21.0.0 made `npm install` fail with `ERESOLVE`, so both packages were **removed**: the single `*rxLet="tags$"` usage in `home.component.html` became `tags = toSignal(...)` + `@if (tags(); as tags)`
 - [x] `npm run build`, `npm test`, `npm run format:check` green
 - [x] Attempt Playwright smoke test without a backend; skip and document if impossible
 - [x] Update this file: Final-state section + Cross-cutting notes
 
 ### Phase 6 result
 
-- Resulting versions: `@angular/core` 22.1.6 (all `@angular/*` runtime packages 22.1.6), `@angular/cli` 22.1.7, `@angular/build` 22.1.7, TypeScript 6.0.3, Node 22 (`engines.node >=22.22.3`), `@rx-angular/cdk|template` 21.0.0 (unchanged), `@analogjs/vite-plugin-angular` 2.7.2.
+- Resulting versions: `@angular/core` 22.1.6 (all `@angular/*` runtime packages 22.1.6), `@angular/cli` 22.1.7, `@angular/build` 22.1.7, TypeScript 6.0.3, Node 22 (`engines.node >=22.22.3`), `@rx-angular/cdk|template` removed, `@analogjs/vite-plugin-angular` 2.7.2.
 - CLI migrations applied: `provideHttpClient(withXhr(), ...)` in `src/app/app.config.ts` (Angular 22 defaults `HttpClient` to `fetch`; `withXhr()` preserves the previous XHR backend); `$safeNavigationMigration()` wrapper around `currentUser()?.image | defaultImage` in `article.component.html` (preserves pre-22 safe-navigation/pipe semantics); `nullishCoalescingNotNullable` / `optionalChainNotNullable` extended diagnostics suppressed in `tsconfig.app.json`. The `ChangeDetectionStrategy.Eager` migration made no changes because every component is already `OnPush`.
 - TypeScript 6 fallout: removed the deprecated `baseUrl` from `tsconfig.json` (TS5101; no import relied on it). `strict: true` was already set and is preserved; TS 6 introduced no new type errors.
 - `@analogjs/vite-plugin-angular` bumped `^2.2.2` -> `^2.7.2`: with 2.2.x, Vitest failed to load every spec (`Failed to resolve import "@oxc-project/runtime/helpers/defineProperty" from @angular/core/fesm2022/testing.mjs`).
@@ -70,7 +70,7 @@ Evidence that phases 1-5 are already satisfied on `main`:
 - RxJS is already 7.x; no RxJS migration needed.
 - Ignore existing PR #26 (`devin/1788860009-angular-22-upgrade`); do not touch it.
 - Phase 6: keep behaviour-preserving CLI migrations (`withXhr()`, `$safeNavigationMigration()`, suppressed extended diagnostics) instead of adopting the new Angular 22 defaults.
-- Phase 6: keep `@rx-angular/*` at 21.0.0 (no 22-compatible release at time of writing); the app builds and runs against Angular 22 with the peer mismatch.
+- Phase 6: drop `@rx-angular/cdk` / `@rx-angular/template` (no 22-compatible release; the 21.x peer range `@angular/core ^21.0.0` breaks `npm install`). Only `RxLet` was used, in one template; replaced by `toSignal` + `@if`.
 
 ## Final state
 
@@ -78,7 +78,7 @@ The base branch `feature/praveen-migration-demo` holds the complete migration (P
 
 ## Cross-cutting follow-ups
 
-- `@rx-angular/cdk` / `@rx-angular/template`: upgrade to a 22-compatible release once published (peer is currently `@angular/core ^21.0.0`).
+- `@rx-angular/*` was removed; re-add only if a 22-compatible release is published and the library is wanted again.
 - `HttpClient`: `withXhr()` was added to preserve the XHR backend; evaluate switching to the Angular 22 default `fetch` backend (`provideHttpClient(withFetch(), ...)` / drop `withXhr()`) and re-run the e2e suite.
 - `$safeNavigationMigration()` in `article.component.html`: replace with the intended expression under the new safe-navigation semantics and remove the wrapper.
 - Extended diagnostics `nullishCoalescingNotNullable` / `optionalChainNotNullable` are suppressed in `tsconfig.app.json`; re-enable and fix the reported templates.
