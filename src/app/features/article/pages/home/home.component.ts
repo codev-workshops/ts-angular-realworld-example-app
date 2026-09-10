@@ -4,8 +4,8 @@ import { TagsService } from '../../services/tags.service';
 import { ArticleListConfig } from '../../models/article-list-config.model';
 import { NgClass } from '@angular/common';
 import { ArticleListComponent } from '../../components/article-list.component';
-import { combineLatest } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { combineLatest, EMPTY } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { UserService } from '../../../../core/auth/services/user.service';
 import { IfAuthenticatedDirective } from '../../../../core/auth/if-authenticated.directive';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -28,7 +28,10 @@ export default class HomeComponent implements OnInit {
   tags = toSignal(
     inject(TagsService)
       .getAll()
-      .pipe(tap(() => this.tagsLoaded.set(true))),
+      .pipe(
+        tap(() => this.tagsLoaded.set(true)),
+        catchError(() => EMPTY),
+      ),
   );
   isFollowingFeed = signal(false);
   destroyRef = inject(DestroyRef);
