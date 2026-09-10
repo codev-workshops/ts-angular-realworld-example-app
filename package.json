@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=22.22.3"
   },
   "private": true,
   "dependencies": {
